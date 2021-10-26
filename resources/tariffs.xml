@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tariffs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.example.org/tariffs"
+         xsi:schemaLocation="http://www.example.org/tariffs/resources/schema.xsd">
+
+   <constant-tariff tariff-id="a1">
+     <name>business tariff</name>
+     <operator-name>A1</operator-name>
+     <payroll>20</payroll>
+     <call-prices>on-net calls</call-prices>
+     <sms-price>2</sms-price>
+     <parameters>tariff connection fee</parameters>
+     <constant-tariff-type>constant tariff</constant-tariff-type>
+     <constant-tariff-parameters>presence of a favorite number</constant-tariff-parameters>
+   </constant-tariff>
+
+    <constant-tariff tariff-id="a2">
+        <name>privet</name>
+        <operator-name>life</operator-name>
+        <payroll>10</payroll>
+        <call-prices>out-of-network calls</call-prices>
+        <sms-price>1</sms-price>
+        <parameters>tariffication</parameters>
+        <constant-tariff-type>constant tariff</constant-tariff-type>
+        <constant-tariff-parameters>presence of a favorite number</constant-tariff-parameters>
+    </constant-tariff>
+
+    <temporary-tariff tariff-id="a3">
+        <name>poka</name>
+        <operator-name>a1</operator-name>
+        <payroll>7</payroll>
+        <call-prices>calls to landlines</call-prices>
+        <sms-price>2</sms-price>
+        <parameters>tariff connection fee</parameters>
+        <temporary-tariff-parameters>temporary</temporary-tariff-parameters>
+    </temporary-tariff>
+
+</tariffs>

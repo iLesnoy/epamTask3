@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/tariffs"
+        xmlns:tns="http://www.example.org/tariffs"
+        elementFormDefault="qualified">
+
+    <element name="tariffs">
+        <complexType>
+            <sequence>
+                <element ref="tns:tariff" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="tariff">
+        <sequence>
+            <element name="name" type="string"/>
+            <element name="operator-name" type="string"/>
+            <element name="payroll" type="positiveInteger"/>
+            <element name="call-prices" type="tns:callPrices"/>
+            <element name="sms-price" type="positiveInteger"/>
+            <element name="parameters" type="tns:parameters"/>
+        </sequence>
+        <attribute name="tariff-id" type="tns:tariffID" use="required"/>
+        <attribute name="manufacturer-website" use="optional" default="http://www.example.org"/>
+    </complexType>
+
+    <complexType name="constantTariff">
+        <complexContent>
+            <extension base="tns:tariff">
+                <sequence>
+                    <element name="constant-tariff-type" type="tns:constantTariffType"/>
+                    <element name="constant-tariff-parameters" type="tns:constantTariffParameters"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="temporaryTariff">
+        <complexContent>
+            <extension base="tns:tariff">
+                <sequence>
+                    <element name="temporary-tariff-parameters" type="tns:temporaryTariffParameters"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <simpleType name="tariffID">
+        <restriction base="ID">
+            <pattern value="\w{1,20}"/> <!--^(\w[1-9][0-9]{0,2})$-->
+        </restriction>
+    </simpleType>
+
+    <simpleType name="name">
+        <restriction base="string">
+            <enumeration value="retirement"/>
+            <enumeration value="business"/>
+            <enumeration value="gigi"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="operator-name">
+        <restriction base="string">
+            <enumeration value="A1"/>
+            <enumeration value="MTC"/>
+            <enumeration value="Life"/>
+        </restriction>
+    </simpleType>
+
+
+    <simpleType name="payroll">
+        <restriction base="unsignedInt">
+            <enumeration value="0"/>
+            <enumeration value="100000"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="callPrices">
+        <restriction base="string">
+            <enumeration value="on-net calls"/>
+            <enumeration value="out-of-network calls"/>
+            <enumeration value="calls to landlines"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="sms-price">
+        <restriction base="unsignedInt">
+            <enumeration value="0"/>
+            <enumeration value="100000"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="parameters">
+        <restriction base="string">
+            <enumeration value="presence of a favorite number"/>
+            <enumeration value="tariffication"/>
+            <enumeration value="tariff connection fee"/>
+        </restriction>
+    </simpleType>
+
+
+    <simpleType name="constantTariffType">
+        <restriction base="string">
+            <enumeration value="constant tariff"/>
+            <enumeration value="affordable tariff plan"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="constantTariffParameters">
+        <restriction base="string">
+            <enumeration value="presence of a favorite number"/>
+            <enumeration value="tariffication"/>
+            <enumeration value="tariff connection fee"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="temporaryTariffParameters">
+        <restriction base="string">
+            <enumeration value="promotional rate tariff"/>
+            <enumeration value="temporary"/>
+            <enumeration value="middle class"/>
+        </restriction>
+    </simpleType>
+
+
+
+    <element name="tariff" type="tns:tariff" abstract="true"/>
+    <element name="constant-tariff" type="tns:constantTariff" substitutionGroup="tns:tariff"/>
+    <element name="temporary-tariff" type="tns:temporaryTariff" substitutionGroup="tns:tariff"/>
+</schema>
