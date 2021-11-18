@@ -1,38 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tariffs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://www.example.org/tariffs"
-         xsi:schemaLocation="http://www.example.org/tariffs/resources/schema.xsd">
+         xsi:schemaLocation="http://www.example.org/tariffs schema.xsd">
 
-   <constant-tariff tariff-id="a1">
-     <name>business tariff</name>
-     <operator-name>A1</operator-name>
-     <payroll>20</payroll>
-     <call-prices>on-net calls</call-prices>
-     <sms-price>2</sms-price>
-     <parameters>tariff connection fee</parameters>
-     <constant-tariff-type>constant tariff</constant-tariff-type>
-     <constant-tariff-parameters>presence of a favorite number</constant-tariff-parameters>
-   </constant-tariff>
-
-    <constant-tariff tariff-id="a2">
+    <constant-tariff tariff-id="a1" title="for new users">
+        <name>business tariff</name>
+        <year>2020</year>
+        <operator-name>A1</operator-name>
+        <payroll>20</payroll>
+        <call-prices>
+            <on-net-calls>0-n rub per minute</on-net-calls>
+            <out-of-network-calls>0-n rub per minute</out-of-network-calls>
+            <calls-to-landlines>0-n rub per minute</calls-to-landlines>
+        </call-prices>
+        <sms-price>1</sms-price>
+        <parameters>
+            <presence-of-a-favorite-number>0-n</presence-of-a-favorite-number>
+            <tariffication>12-second,minute</tariffication>
+            <tariff-connection-fee>0-n rub</tariff-connection-fee>
+        </parameters>
+        <constant-tariff-parameters>presence of a favorite number(0-n rub per minute)</constant-tariff-parameters>
+    </constant-tariff>
+    <constant-tariff tariff-id="a2" title="for new users">
         <name>privet</name>
+        <year>2020</year>
         <operator-name>life</operator-name>
         <payroll>10</payroll>
-        <call-prices>out-of-network calls</call-prices>
+        <call-prices>
+            <on-net-calls>0-n rub per minute</on-net-calls>
+            <out-of-network-calls>0-n rub per minute</out-of-network-calls>
+            <calls-to-landlines>0-n rub per minute</calls-to-landlines>
+        </call-prices>
         <sms-price>1</sms-price>
-        <parameters>tariffication</parameters>
-        <constant-tariff-type>constant tariff</constant-tariff-type>
-        <constant-tariff-parameters>presence of a favorite number</constant-tariff-parameters>
+        <parameters>
+            <presence-of-a-favorite-number>0-n</presence-of-a-favorite-number>
+            <tariffication>12-second,minute</tariffication>
+            <tariff-connection-fee>0-n rub</tariff-connection-fee>
+        </parameters>
+        <constant-tariff-parameters>tariffication(12-sec,minute)</constant-tariff-parameters>
     </constant-tariff>
-
-    <temporary-tariff tariff-id="a3">
+    <temporary-tariff tariff-id="a3" title="for old users">
         <name>poka</name>
-        <operator-name>a1</operator-name>
+        <year>2021</year>
+        <operator-name>Megafon</operator-name>
         <payroll>7</payroll>
-        <call-prices>calls to landlines</call-prices>
-        <sms-price>2</sms-price>
-        <parameters>tariff connection fee</parameters>
+        <call-prices>
+            <on-net-calls>0-n rub per minute</on-net-calls>
+            <out-of-network-calls>0-n rub per minute</out-of-network-calls>
+            <calls-to-landlines>0-n rub per minute</calls-to-landlines>
+        </call-prices>
+        <sms-price>1</sms-price>
+        <parameters>
+            <presence-of-a-favorite-number>0-n</presence-of-a-favorite-number>
+            <tariffication>12-second,minute</tariffication>
+            <tariff-connection-fee>0-n rub</tariff-connection-fee>
+        </parameters>
         <temporary-tariff-parameters>temporary</temporary-tariff-parameters>
+    </temporary-tariff>
+    <temporary-tariff tariff-id="a4" title="for new users">
+        <name>future</name>
+        <year>2001</year>
+        <operator-name>Eka</operator-name>
+        <payroll>14</payroll>
+        <call-prices>
+            <on-net-calls>0-n rub per minute</on-net-calls>
+            <out-of-network-calls>0-n rub per minute</out-of-network-calls>
+            <calls-to-landlines>0-n rub per minute</calls-to-landlines>
+        </call-prices>
+        <sms-price>1</sms-price>
+        <parameters>
+            <presence-of-a-favorite-number>1-n rub</presence-of-a-favorite-number>
+            <tariffication>10-second,minute</tariffication>
+            <tariff-connection-fee>0-n</tariff-connection-fee>
+        </parameters>
+        <temporary-tariff-parameters>user's personal account</temporary-tariff-parameters>
     </temporary-tariff>
 
 </tariffs>

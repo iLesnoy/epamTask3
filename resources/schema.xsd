@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/tariffs"
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.org/tariffs"
         xmlns:tns="http://www.example.org/tariffs"
         elementFormDefault="qualified">
 
@@ -11,24 +12,29 @@
         </complexType>
     </element>
 
-    <complexType name="tariff">
+    <element name="tariff" type="tns:Tariff" abstract="true"/>
+    <element name="constant-tariff" type="tns:constantTariff" substitutionGroup="tns:tariff"/>
+    <element name="temporary-tariff" type="tns:temporaryTariff" substitutionGroup="tns:tariff"/>
+
+
+    <complexType name="Tariff">
         <sequence>
             <element name="name" type="string"/>
+            <element name="year" type="gYear"/>
             <element name="operator-name" type="string"/>
             <element name="payroll" type="positiveInteger"/>
-            <element name="call-prices" type="tns:callPrices"/>
+            <element name="call-prices" type="tns:CallPrices"/>
             <element name="sms-price" type="positiveInteger"/>
             <element name="parameters" type="tns:parameters"/>
         </sequence>
         <attribute name="tariff-id" type="tns:tariffID" use="required"/>
-        <attribute name="manufacturer-website" use="optional" default="http://www.example.org"/>
+        <attribute name="title" use="optional" type="string"/>
     </complexType>
 
     <complexType name="constantTariff">
         <complexContent>
-            <extension base="tns:tariff">
+            <extension base="tns:Tariff">
                 <sequence>
-                    <element name="constant-tariff-type" type="tns:constantTariffType"/>
                     <element name="constant-tariff-parameters" type="tns:constantTariffParameters"/>
                 </sequence>
             </extension>
@@ -37,7 +43,7 @@
 
     <complexType name="temporaryTariff">
         <complexContent>
-            <extension base="tns:tariff">
+            <extension base="tns:Tariff">
                 <sequence>
                     <element name="temporary-tariff-parameters" type="tns:temporaryTariffParameters"/>
                 </sequence>
@@ -47,7 +53,7 @@
 
     <simpleType name="tariffID">
         <restriction base="ID">
-            <pattern value="\w{1,20}"/> <!--^(\w[1-9][0-9]{0,2})$-->
+            <pattern value="\w\d{1,10}"/>
         </restriction>
     </simpleType>
 
@@ -75,13 +81,13 @@
         </restriction>
     </simpleType>
 
-    <simpleType name="callPrices">
-        <restriction base="string">
-            <enumeration value="on-net calls"/>
-            <enumeration value="out-of-network calls"/>
-            <enumeration value="calls to landlines"/>
-        </restriction>
-    </simpleType>
+    <complexType name="CallPrices">
+        <sequence>
+            <element name="on-net-calls" type="string"/>
+            <element name="out-of-network-calls" type="string"/>
+            <element name="calls-to-landlines" type="string"/>
+        </sequence>
+    </complexType>
 
     <simpleType name="sms-price">
         <restriction base="unsignedInt">
@@ -90,27 +96,19 @@
         </restriction>
     </simpleType>
 
-    <simpleType name="parameters">
-        <restriction base="string">
-            <enumeration value="presence of a favorite number"/>
-            <enumeration value="tariffication"/>
-            <enumeration value="tariff connection fee"/>
-        </restriction>
-    </simpleType>
-
-
-    <simpleType name="constantTariffType">
-        <restriction base="string">
-            <enumeration value="constant tariff"/>
-            <enumeration value="affordable tariff plan"/>
-        </restriction>
-    </simpleType>
+    <complexType name="parameters">
+        <sequence>
+            <element name="presence-of-a-favorite-number" type="string"/>
+            <element name="tariffication" type="string"/>
+            <element name="tariff-connection-fee" type="string"/>
+        </sequence>
+    </complexType>
 
     <simpleType name="constantTariffParameters">
         <restriction base="string">
-            <enumeration value="presence of a favorite number"/>
-            <enumeration value="tariffication"/>
-            <enumeration value="tariff connection fee"/>
+            <enumeration value="presence of a favorite number(0-n rub per minute)"/>
+            <enumeration value="tariffication(12-sec,minute)"/>
+            <enumeration value="tariff connection fee(0-n rub)"/>
         </restriction>
     </simpleType>
 
@@ -118,13 +116,7 @@
         <restriction base="string">
             <enumeration value="promotional rate tariff"/>
             <enumeration value="temporary"/>
-            <enumeration value="middle class"/>
+            <enumeration value="user's personal account"/>
         </restriction>
     </simpleType>
-
-
-
-    <element name="tariff" type="tns:tariff" abstract="true"/>
-    <element name="constant-tariff" type="tns:constantTariff" substitutionGroup="tns:tariff"/>
-    <element name="temporary-tariff" type="tns:temporaryTariff" substitutionGroup="tns:tariff"/>
 </schema>
